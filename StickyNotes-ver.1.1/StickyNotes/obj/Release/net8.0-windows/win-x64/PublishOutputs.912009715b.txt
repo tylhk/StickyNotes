@@ -1,0 +1,7 @@
+C:\Users\hp\Desktop\StickyNotes.pdb
+C:\Users\hp\Desktop\D3DCompiler_47_cor3.dll
+C:\Users\hp\Desktop\PenImc_cor3.dll
+C:\Users\hp\Desktop\PresentationNative_cor3.dll
+C:\Users\hp\Desktop\vcruntime140_cor3.dll
+C:\Users\hp\Desktop\wpfgfx_cor3.dll
+C:\Users\hp\Desktop\StickyNotes.exe
