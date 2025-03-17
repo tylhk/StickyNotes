@@ -1,0 +1,176 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|c:\\users\\hp\\desktop\\stickynotes-ver.1.2\\stickynotes-ver.1.2\\stickynotes\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|solutionrelative:stickynotes\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|c:\\users\\hp\\desktop\\stickynotes-ver.1.2\\stickynotes-ver.1.2\\stickynotes\\notedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|solutionrelative:stickynotes\\notedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|c:\\users\\hp\\desktop\\stickynotes-ver.1.2\\stickynotes-ver.1.2\\stickynotes\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|solutionrelative:stickynotes\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|c:\\users\\hp\\desktop\\stickynotes-ver.1.2\\stickynotes-ver.1.2\\stickynotes\\controls\\stickynotecontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|solutionrelative:stickynotes\\controls\\stickynotecontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|c:\\users\\hp\\desktop\\stickynotes-ver.1.2\\stickynotes-ver.1.2\\stickynotes\\controls\\stickynotecontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|solutionrelative:stickynotes\\controls\\stickynotecontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|c:\\users\\hp\\desktop\\stickynotes-ver.1.2\\stickynotes-ver.1.2\\stickynotes\\win32apihelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|solutionrelative:stickynotes\\win32apihelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|c:\\users\\hp\\desktop\\stickynotes-ver.1.2\\stickynotes-ver.1.2\\stickynotes\\app.manifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{D60E9220-FE14-4E6B-BEFC-D05D997E789E}|StickyNotes\\StickyNotes.csproj|solutionrelative:stickynotes\\app.manifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\gitcode\\StickyNotes\\StickyNotes\\StickyNotes\\obj\\Debug\\net8.0-windows\\StickyNotes_tasgrkl1_wpftmp.AssemblyInfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\gitcode\\StickyNotes\\StickyNotes\\StickyNotes\\obj\\Debug\\net8.0-windows\\StickyNotes_eqdyreg0_wpftmp.AssemblyInfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\gitcode\\StickyNotes\\StickyNotes\\StickyNotes\\obj\\Debug\\net8.0-windows\\StickyNotes_aiclb3u3_wpftmp.AssemblyInfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StickyNoteControl.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\Controls\\StickyNoteControl.xaml.cs",
+              "RelativeDocumentMoniker": "StickyNotes\\Controls\\StickyNoteControl.xaml.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\Controls\\StickyNoteControl.xaml.cs",
+              "RelativeToolTip": "StickyNotes\\Controls\\StickyNoteControl.xaml.cs",
+              "ViewState": "AgIAAIIBAAAAAAAAAAAgwKIBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-14T08:12:03.454Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "StickyNotes\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\MainWindow.xaml.cs",
+              "RelativeToolTip": "StickyNotes\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAUwHoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-14T02:16:11.13Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Win32ApiHelper.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\Win32ApiHelper.cs",
+              "RelativeDocumentMoniker": "StickyNotes\\Win32ApiHelper.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\Win32ApiHelper.cs",
+              "RelativeToolTip": "StickyNotes\\Win32ApiHelper.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAswD0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T01:32:26.16Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "StickyNotes\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\MainWindow.xaml",
+              "RelativeToolTip": "StickyNotes\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-14T08:06:33.109Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "NoteData.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\NoteData.cs",
+              "RelativeDocumentMoniker": "StickyNotes\\NoteData.cs",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\NoteData.cs",
+              "RelativeToolTip": "StickyNotes\\NoteData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T05:24:04.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "StickyNoteControl.xaml",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\Controls\\StickyNoteControl.xaml",
+              "RelativeDocumentMoniker": "StickyNotes\\Controls\\StickyNoteControl.xaml",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\Controls\\StickyNoteControl.xaml",
+              "RelativeToolTip": "StickyNotes\\Controls\\StickyNoteControl.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-14T02:14:38.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "app.manifest",
+              "DocumentMoniker": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\app.manifest",
+              "RelativeDocumentMoniker": "StickyNotes\\app.manifest",
+              "ToolTip": "C:\\Users\\hp\\Desktop\\StickyNotes-ver.1.2\\StickyNotes-ver.1.2\\StickyNotes\\app.manifest",
+              "RelativeToolTip": "StickyNotes\\app.manifest",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001203|",
+              "WhenOpened": "2025-03-17T05:03:12.583Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "StickyNotes_tasgrkl1_wpftmp.AssemblyInfo.cs",
+              "DocumentMoniker": "F:\\gitcode\\StickyNotes\\StickyNotes\\StickyNotes\\obj\\Debug\\net8.0-windows\\StickyNotes_tasgrkl1_wpftmp.AssemblyInfo.cs",
+              "ToolTip": "F:\\gitcode\\StickyNotes\\StickyNotes\\StickyNotes\\obj\\Debug\\net8.0-windows\\StickyNotes_tasgrkl1_wpftmp.AssemblyInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-13T09:32:34.724Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "StickyNotes_eqdyreg0_wpftmp.AssemblyInfo.cs",
+              "DocumentMoniker": "F:\\gitcode\\StickyNotes\\StickyNotes\\StickyNotes\\obj\\Debug\\net8.0-windows\\StickyNotes_eqdyreg0_wpftmp.AssemblyInfo.cs",
+              "ToolTip": "F:\\gitcode\\StickyNotes\\StickyNotes\\StickyNotes\\obj\\Debug\\net8.0-windows\\StickyNotes_eqdyreg0_wpftmp.AssemblyInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-13T09:31:50.722Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "StickyNotes_aiclb3u3_wpftmp.AssemblyInfo.cs",
+              "DocumentMoniker": "F:\\gitcode\\StickyNotes\\StickyNotes\\StickyNotes\\obj\\Debug\\net8.0-windows\\StickyNotes_aiclb3u3_wpftmp.AssemblyInfo.cs",
+              "ToolTip": "F:\\gitcode\\StickyNotes\\StickyNotes\\StickyNotes\\obj\\Debug\\net8.0-windows\\StickyNotes_aiclb3u3_wpftmp.AssemblyInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-13T09:31:00.188Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
