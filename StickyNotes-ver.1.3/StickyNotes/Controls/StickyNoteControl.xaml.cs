@@ -178,8 +178,9 @@ namespace StickyNotes.Controls
         public StickyNoteControl()
         {
             InitializeComponent();
-            this.Owner = Application.Current.MainWindow; // 设置主窗口为Owner
+            // this.Owner = Application.Current.MainWindow;
             this.DataContext = this;
+            this.Topmost = true; // 保持便签窗口置顶，但独立于主窗口
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
