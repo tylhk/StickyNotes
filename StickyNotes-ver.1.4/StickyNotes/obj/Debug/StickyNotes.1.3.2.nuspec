@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>StickyNotes</id>
+    <version>1.3.2</version>
+    <authors>StickyNotes</authors>
+    <description>Package Description</description>
+    <repository type="git" />
+    <dependencies>
+      <group targetFramework="net8.0-windows7.0">
+        <dependency id="Newtonsoft.Json" version="13.0.3" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net8.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any/net8.0-windows7.0/icon/r7ats-wjgih-001.ico" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="C:\Users\hp\Desktop\StickyNotes-ver.1.2\StickyNotes-ver.1.3\StickyNotes\bin\Debug\net8.0-windows\StickyNotes.runtimeconfig.json" target="lib\net8.0-windows7.0\StickyNotes.runtimeconfig.json" />
+    <file src="C:\Users\hp\Desktop\StickyNotes-ver.1.2\StickyNotes-ver.1.3\StickyNotes\bin\Debug\net8.0-windows\StickyNotes.dll" target="lib\net8.0-windows7.0\StickyNotes.dll" />
+    <file src="C:\Users\hp\Desktop\StickyNotes-ver.1.2\StickyNotes-ver.1.3\StickyNotes\icon\r7ats-wjgih-001.ico" target="content\icon\r7ats-wjgih-001.ico" />
+    <file src="C:\Users\hp\Desktop\StickyNotes-ver.1.2\StickyNotes-ver.1.3\StickyNotes\icon\r7ats-wjgih-001.ico" target="contentFiles\any\net8.0-windows7.0\icon\r7ats-wjgih-001.ico" />
+    <file src="C:\Users\hp\Desktop\StickyNotes-ver.1.2\StickyNotes-ver.1.3\StickyNotes\icon\icon.png" target="\icon\icon.png" />
+  </files>
+</package>
