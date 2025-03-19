@@ -1,4 +1,4 @@
-个人博客指路：[satone1008.cn](satone1008.cn)
+详细说明可见博客：[satone1008.cn](https://satone1008.cn/index.php/2025/03/18/%e5%8f%af%e5%9c%a8%e7%aa%97%e5%8f%a3%e5%9b%ba%e5%ae%9a%e7%9a%84windows%e6%a1%8c%e9%9d%a2%e4%be%bf%e7%ad%be%e8%bd%af%e4%bb%b6/)
 
 1.2版本：
 
