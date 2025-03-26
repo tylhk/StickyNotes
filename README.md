@@ -8,7 +8,7 @@ Windows系统自带的[便签软件](https://apps.microsoft.com/detail/9nblggh4q
 
 ## 使用方法
 
-bin-debug中找到exe文件直接运行即可
+下载项目页Releases文件
 
 或可使用源码自行编译打包
 
