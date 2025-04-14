@@ -50,6 +50,18 @@ bin-debug中找到exe文件直接运行即可
 
 ------
 
-个人博客指路：[satone1008.cn](https://satone1008.cn)
+## 1.41更新
+
+- 创建的便签现在不会占用系统栏图标
+- 修复了便签内容无法自动保存和加载的问题
+- 便签的颜色现在也可以自动保存
+
+------
+
+便签页面还略显粗糙，如有想法欢迎提交issue或pr
+
+若有反馈和建议欢迎来我的博客留言
+
+个人博客指路：[satone1008.cn](https://satone1008.cn/index.php/2025/03/18/%E5%8F%AF%E5%9C%A8%E7%AA%97%E5%8F%A3%E5%9B%BA%E5%AE%9A%E7%9A%84windows%E6%A1%8C%E9%9D%A2%E4%BE%BF%E7%AD%BE%E8%BD%AF%E4%BB%B6/)
 
 [仓库地址](https://github.com/tylhk/StickyNotes)
