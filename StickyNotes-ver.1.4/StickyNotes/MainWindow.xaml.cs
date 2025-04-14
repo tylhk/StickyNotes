@@ -1,10 +1,13 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel;
 using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Application = System.Windows.Application;
 using Color = System.Windows.Media.Color;
+using ColorConverter = System.Windows.Media.ColorConverter;
 using MessageBox = System.Windows.MessageBox;
 using Point = System.Windows.Point;
 using StickyNoteControl = StickyNotes.Controls.StickyNoteControl;
@@ -15,6 +18,18 @@ namespace StickyNotes
 
     public partial class MainWindow : Window
     {
+        public class NoteData
+        {
+            public string Content { get; set; }
+            public double X { get; set; }
+            public double Y { get; set; }
+            public long TargetWindowHandle { get; set; }
+            public string TargetWindowTitle { get; set; }
+            public string TargetWindowClass { get; set; }
+            public double OffsetX { get; set; }
+            public double OffsetY { get; set; }
+            public string Color { get; set; }
+        }
         public Color SelectedColor { get; set; } = Colors.Yellow;
         private void ColorPickerButton_Click(object sender, RoutedEventArgs e)
         {
@@ -55,7 +70,6 @@ namespace StickyNotes
                 this.Hide();
                 return;
             }
-            SaveNotes();
             foreach (Window window in Application.Current.Windows.OfType<StickyNoteControl>().ToList())
             {
                 window.Close();
@@ -75,7 +89,8 @@ namespace StickyNotes
                     Width = 200,
                     Height = 150,
                     Left = 100,
-                    Top = 100
+                    Top = 100,
+                    BackgroundColor = Colors.Yellow
                 };
                 exampleNote.Show();
             }
@@ -88,14 +103,37 @@ namespace StickyNotes
             VersionTextBlock.Text = $"v{version.Major}.{version.Minor}.{version.Build}";
         }
 
-        private void SaveNotes()
+        public void SaveNotes()
         {
-            try 
-            { 
-                var notes = Application.Current.Windows.OfType<StickyNoteControl>().ToList();
+            string appDataPath = Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData
+            );
+            string directoryPath = Path.Combine(appDataPath, "StickyNotes");
+            string filePath = Path.Combine(directoryPath, "notes.json");
+            Directory.CreateDirectory(directoryPath);
+            try
+            {
+                Directory.CreateDirectory(directoryPath);
+
+                // 强制回收资源，确保所有隐藏窗口被枚举
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                // 获取所有便签窗口（包括隐藏的）
+                var notes = Application.Current.Windows
+                    .OfType<StickyNoteControl>()
+                    .Where(n => n.Visibility != Visibility.Collapsed && !string.IsNullOrWhiteSpace(n.NoteContent))
+                    .ToList();
+
+                // 调试日志
+                File.AppendAllText(
+                    Path.Combine(directoryPath, "debug.log"),
+                    $"[{DateTime.Now}] 保存便签数量: {notes.Count}\n"
+                );
+
                 if (notes.Count == 0)
                 {
-                    File.Delete("notes.json"); 
+                    if (File.Exists(filePath)) File.Delete(filePath);
                     return;
                 }
 
@@ -104,29 +142,69 @@ namespace StickyNotes
                     Content = n.NoteContent,
                     X = n.Left,
                     Y = n.Top,
-                    TargetWindowHandle = n.TargetWindowHandle,
+                    TargetWindowHandle = n.TargetWindowHandle.ToInt64(),
                     TargetWindowTitle = Win32ApiHelper.GetWindowTitle(n.TargetWindowHandle),
                     TargetWindowClass = Win32ApiHelper.GetWindowClassName(n.TargetWindowHandle),
                     OffsetX = n.OffsetFromTarget.X,
-                    OffsetY = n.OffsetFromTarget.Y
+                    OffsetY = n.OffsetFromTarget.Y,
+                    Color = n.BackgroundColor.ToString()
                 }).ToList();
 
-                File.WriteAllText("notes.json", JsonConvert.SerializeObject(notesData));
+                File.WriteAllText(
+                    filePath,
+                    JsonConvert.SerializeObject(notesData, Formatting.Indented),
+                    Encoding.UTF8
+                );
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"保存便签失败: {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"保存失败: {ex.Message}\n堆栈跟踪:\n{ex.StackTrace}");
             }
         }
 
         private void LoadNotes()
         {
-            if (!File.Exists("notes.json")) return;
+            string appDataPath = Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData
+            );
+            string directoryPath = Path.Combine(appDataPath, "StickyNotes");
+            string filePath = Path.Combine(directoryPath, "notes.json");
+            string debugLogPath = Path.Combine(directoryPath, "debug.log");
+            Directory.CreateDirectory(directoryPath);
 
-            var notesData = JsonConvert.DeserializeObject<List<NoteData>>(File.ReadAllText("notes.json"));
+            // 记录调试信息
+            File.AppendAllText(debugLogPath, $"[{DateTime.Now}] 正在尝试加载路径: {filePath}\n");
+            if (!File.Exists(filePath))
+            {
+                File.AppendAllText(
+                Path.Combine(appDataPath, "StickyNotes", "debug.log"),
+                $"[{DateTime.Now}] 未找到 notes.json\n"
+                );
+                return;
+            }
+
+            var notesData = JsonConvert.DeserializeObject<List<NoteData>>(File.ReadAllText(filePath));
             foreach (var data in notesData)
             {
-                IntPtr targetHandle = data.TargetWindowHandle;
+                Color color;
+                try
+                {
+                    if (!string.IsNullOrEmpty(data.Color))
+                    {
+                        color = (Color)ColorConverter.ConvertFromString(data.Color);
+                    }
+                    else
+                    {
+                        throw new FormatException("Color string is empty");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    File.AppendAllText(debugLogPath, $"颜色解析失败\n");
+                    File.AppendAllText(debugLogPath, $"[{DateTime.Now}] 颜色解析失败: {data.Color} | 错误: {ex.Message}\n");
+                    color = Colors.Yellow;
+                }
+                IntPtr targetHandle = new IntPtr(data.TargetWindowHandle);
                 if (targetHandle == IntPtr.Zero)
                 {
                     var desktopNote = new StickyNoteControl
@@ -145,6 +223,18 @@ namespace StickyNotes
                         data.TargetWindowTitle,
                         data.TargetWindowClass
                     );
+                    if (targetHandle == IntPtr.Zero)
+                    {
+                        var floatingNote = new StickyNoteControl
+                        {
+                            NoteContent = data.Content,
+                            Left = data.X,
+                            Top = data.Y
+                        };
+                        floatingNote.PinToDesktop();
+                        floatingNote.Show();
+                        continue;
+                    }
                 }
                 if (targetHandle == IntPtr.Zero)
                 {
@@ -164,7 +254,8 @@ namespace StickyNotes
                     Left = data.X,
                     Top = data.Y,
                     TargetWindowHandle = targetHandle,
-                    OffsetFromTarget = new Point(data.OffsetX, data.OffsetY)
+                    OffsetFromTarget = new Point(data.OffsetX, data.OffsetY),
+                    BackgroundColor = color
                 };
                 note.PinToWindow(targetHandle, data.OffsetX, data.OffsetY);
                 note.Show();

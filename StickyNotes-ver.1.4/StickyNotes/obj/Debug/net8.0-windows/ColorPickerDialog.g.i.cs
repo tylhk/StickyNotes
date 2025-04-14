@@ -77,7 +77,7 @@ namespace StickyNotes {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/StickyNotes;V1.4.0.0;component/colorpickerdialog.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/StickyNotes;V1.4.1.0;component/colorpickerdialog.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\ColorPickerDialog.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

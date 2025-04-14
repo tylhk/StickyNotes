@@ -1,5 +1,5 @@
 ﻿StickyNotes
-1.4.0.0
+1.4.1.0
 
 winexe
 C#
@@ -16,5 +16,5 @@ F:\gitcode\StickyNotes\StickyNotes-ver.1.4\StickyNotes\App.xaml
 208273442269
 ColorPickerDialog.xaml;Controls\StickyNoteControl.xaml;MainWindow.xaml;
 
-True
+False
 

@@ -37,11 +37,7 @@ namespace StickyNotes
             _notifyIcon.ContextMenuStrip = contextMenu;
 
             _notifyIcon.DoubleClick += (s, args) => ShowMainWindow();
-
-            // 现在 MainWindow 已初始化，可以安全订阅事件
             MainWindow.Closing += MainWindow_Closing;
-
-            // 如果启动时不显示主窗口，可在此隐藏
             MainWindow.Hide();
         }
 
@@ -50,6 +46,7 @@ namespace StickyNotes
             if (!IsExiting)
             {
                 e.Cancel = true;
+                MainWindow.ShowInTaskbar = false;
                 MainWindow.Hide();
             }
         }
@@ -57,6 +54,7 @@ namespace StickyNotes
         private void ShowMainWindow()
         {
             MainWindow.Show();
+            MainWindow.ShowInTaskbar = true;
             MainWindow.WindowState = WindowState.Normal;
             MainWindow.Activate();
         }
@@ -64,13 +62,32 @@ namespace StickyNotes
         private void ExitApplication()
         {
             IsExiting = true;
-            MainWindow.Close(); // 触发保存逻辑
+
+            // 先保存数据
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.SaveNotes();
+            }
+
+            // 强制关闭所有窗口（跳过隐藏逻辑）
+            foreach (Window window in Application.Current.Windows.OfType<Controls.StickyNoteControl>().ToList())
+            {
+                window.Close();
+            }
+
+            MainWindow.Close();
             _notifyIcon.Visible = false;
             Current.Shutdown();
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
+            // 最终兜底保存
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.SaveNotes();
+            }
+
             _notifyIcon?.Dispose();
             base.OnExit(e);
         }

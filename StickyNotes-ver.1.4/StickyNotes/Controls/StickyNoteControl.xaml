@@ -5,7 +5,8 @@
         AllowsTransparency="True"
         Background="Transparent"
         Topmost="True"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        ShowInTaskbar="False">
     <Border Background="{Binding BackgroundColor, 
                     Converter={StaticResource ColorToBrushConverter},
                     RelativeSource={RelativeSource AncestorType=Window}}" CornerRadius="5" 

@@ -1,20 +1,20 @@
 ﻿StickyNotes
-1.3.2.0
+1.4.1.0
 
 winexe
 C#
 .cs
-C:\Users\hp\Desktop\StickyNotes-ver.1.3\StickyNotes-ver.1.3\StickyNotes\obj\Release\net8.0-windows\
+F:\gitcode\StickyNotes\StickyNotes-ver.1.4\StickyNotes\obj\Release\net8.0-windows\
 StickyNotes
 none
 false
 TRACE;RELEASE;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-C:\Users\hp\Desktop\StickyNotes-ver.1.3\StickyNotes-ver.1.3\StickyNotes\App.xaml
+F:\gitcode\StickyNotes\StickyNotes-ver.1.4\StickyNotes\App.xaml
 31814346085
 1-1988928614
 111021480922
-199730399617
+208273442269
 ColorPickerDialog.xaml;Controls\StickyNoteControl.xaml;MainWindow.xaml;
 
-False
+True
 

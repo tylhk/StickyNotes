@@ -15,6 +15,7 @@ namespace StickyNotes.Controls
 {
     public partial class StickyNoteControl : Window
     {
+        public bool IsUserDeleted { get; private set; } = false;
         private IntPtr _targetWindowHandle = IntPtr.Zero;
         private DispatcherTimer _trackingTimer;
         private Point _offsetFromTargetWindow;
@@ -213,6 +214,7 @@ namespace StickyNotes.Controls
 
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            IsUserDeleted = true; // 设置删除标志
             var fadeOut = new DoubleAnimation
             {
                 From = 1,
@@ -397,6 +399,16 @@ namespace StickyNotes.Controls
 
             PinMenuItem.Visibility = Visibility.Collapsed;
             UnpinMenuItem.Visibility = Visibility.Visible;
+        }
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            if (!App.IsExiting && !IsUserDeleted) // 检查是否为用户删除
+            {
+                e.Cancel = true;
+                this.Visibility = Visibility.Hidden;
+                return;
+            }
+            base.OnClosing(e);
         }
 
     }
