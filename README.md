@@ -18,7 +18,7 @@ Windows系统自带的[便签软件](https://apps.microsoft.com/detail/9nblggh4q
 
 创建便签时可以自由选择字体大小以及文本框背景颜色。
 
-![https://satone1008.cn/wp-content/uploads/2025/03/1.gif](https://satone1008.cn/wp-content/uploads/2025/03/1-1.gif)
+![Picture1](https://pica.zhimg.com/v2-a37a5dc7030c283d0759f5a82cf3972a_b.webp)
 
 ### 便签的窗口固定
 
@@ -28,7 +28,7 @@ Windows系统自带的[便签软件](https://apps.microsoft.com/detail/9nblggh4q
 
 于是在我开发的这个便签软件中，你可以将各个便签固定在窗口上。（目标由你选定！）固定之后便签会与窗口处于同一优先级，也就意味着其他窗口会将其他窗口的便签盖住，解决了我一直以来的便签痛点。
 
-![https://satone1008.cn/wp-content/uploads/2025/03/1.gif](https://satone1008.cn/wp-content/uploads/2025/03/2-1.gif)
+![Picture2](https://satone1008.cn/wp-content/uploads/2025/03/2-1.gif)
 
 ### 便签的自动储存与读取
 
