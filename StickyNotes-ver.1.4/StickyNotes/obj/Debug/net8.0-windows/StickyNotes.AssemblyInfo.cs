@@ -13,11 +13,11 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("StickyNotes")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.4.1.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.4.1+4e78cd8bddb9f4b946c0a3ee09453ee17ef19e74")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.4.2.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.4.2+3709dd3301a587971d29a4f99007b9a9c0d454d1")]
 [assembly: System.Reflection.AssemblyProductAttribute("StickyNotes")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StickyNotes")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.4.1.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.4.2.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
 

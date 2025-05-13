@@ -5,7 +5,7 @@
   },
   "projects": {
     "F:\\gitcode\\StickyNotes\\StickyNotes\\StickyNotes.csproj": {
-      "version": "1.4.1",
+      "version": "1.4.2",
       "restore": {
         "projectUniqueName": "F:\\gitcode\\StickyNotes\\StickyNotes\\StickyNotes.csproj",
         "projectName": "StickyNotes",
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -74,7 +74,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300-preview.0.25177.5/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

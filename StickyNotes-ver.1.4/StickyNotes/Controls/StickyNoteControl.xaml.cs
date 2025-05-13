@@ -221,7 +221,7 @@ namespace StickyNotes.Controls
 
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            IsUserDeleted = true; // 设置删除标志
+            IsUserDeleted = true;
             var fadeOut = new DoubleAnimation
             {
                 From = 1,
@@ -302,7 +302,7 @@ namespace StickyNotes.Controls
             IntPtr targetHandle = _preMenuTargetHandle;
             if (targetHandle == IntPtr.Zero)
             {
-                MessageBox.Show("请先激活目标窗口，再右键固定！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("请先选中目标窗口，再右键固定！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             var wih = new WindowInteropHelper(this);
@@ -317,6 +317,7 @@ namespace StickyNotes.Controls
             }
             else
             {
+                this.Topmost = false;
                 PinToWindow(targetHandle);
             }
             PinMenuItem.Visibility = Visibility.Collapsed;
@@ -346,6 +347,9 @@ namespace StickyNotes.Controls
                 this.Left - wpfTargetPos.X,
                 this.Top - wpfTargetPos.Y
             );
+            var selfHandle = new WindowInteropHelper(this).Handle;
+            WindowInteropHelper helper = new WindowInteropHelper(this);
+            helper.Owner = targetHandle;
             _targetWindowHandle = targetHandle;
             _trackingTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
             _trackingTimer.Tick += TrackingTimer_Tick;
@@ -415,7 +419,7 @@ namespace StickyNotes.Controls
         }
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            if (!App.IsExiting && !IsUserDeleted) // 检查是否为用户删除
+            if (!App.IsExiting && !IsUserDeleted)
             {
                 e.Cancel = true;
                 this.Visibility = Visibility.Hidden;

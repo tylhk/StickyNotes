@@ -18,7 +18,7 @@ Windows系统自带的[便签软件](https://apps.microsoft.com/detail/9nblggh4q
 
 创建便签时可以自由选择字体大小以及文本框背景颜色。
 
-![gif1](https://pica.zhimg.com/50/v2-a37a5dc7030c283d0759f5a82cf3972a_720w.webp?source=2c26e567)
+![https://satone1008.cn/wp-content/uploads/2025/03/1.gif](https://satone1008.cn/wp-content/uploads/2025/03/1-1.gif)
 
 ### 便签的窗口固定
 
@@ -28,7 +28,7 @@ Windows系统自带的[便签软件](https://apps.microsoft.com/detail/9nblggh4q
 
 于是在我开发的这个便签软件中，你可以将各个便签固定在窗口上。（目标由你选定！）固定之后便签会与窗口处于同一优先级，也就意味着其他窗口会将其他窗口的便签盖住，解决了我一直以来的便签痛点。
 
-![gif2](https://satone1008.cn/wp-content/uploads/2025/03/2-1.gif)
+![https://satone1008.cn/wp-content/uploads/2025/03/1.gif](https://satone1008.cn/wp-content/uploads/2025/03/2-1.gif)
 
 ### 便签的自动储存与读取
 
@@ -55,6 +55,13 @@ Windows系统自带的[便签软件](https://apps.microsoft.com/detail/9nblggh4q
 - 创建的便签现在不会占用系统栏图标
 - 修复了便签内容无法自动保存和加载的问题
 - 便签的颜色现在也可以自动保存
+
+------
+## 1.42更新
+
+- 修复了便签固定后无法被其他窗口遮盖的bug
+- **现在窗口关闭时，固定在窗口上的便签会被关闭但不会被删除**
+- 从托盘处呼出主界面会重置当前所有便签状态，也可以让被关闭但没有删除的便签重新显示
 
 ------
 

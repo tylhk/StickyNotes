@@ -117,17 +117,14 @@ namespace StickyNotes
             {
                 Directory.CreateDirectory(directoryPath);
 
-                // 强制回收资源，确保所有隐藏窗口被枚举
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
 
-                // 获取所有便签窗口（包括隐藏的）
                 var notes = Application.Current.Windows
                     .OfType<StickyNoteControl>()
                     .Where(n => n.Visibility != Visibility.Collapsed && !string.IsNullOrWhiteSpace(n.NoteContent))
                     .ToList();
 
-                // 调试日志
                 File.AppendAllText(
                     Path.Combine(directoryPath, "debug.log"),
                     $"[{DateTime.Now}] 保存便签数量: {notes.Count}\n"
@@ -174,7 +171,6 @@ namespace StickyNotes
             string debugLogPath = Path.Combine(directoryPath, "debug.log");
             Directory.CreateDirectory(directoryPath);
 
-            // 记录调试信息
             File.AppendAllText(debugLogPath, $"[{DateTime.Now}] 正在尝试加载路径: {filePath}\n");
             if (!File.Exists(filePath))
             {

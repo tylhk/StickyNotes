@@ -50,8 +50,6 @@ namespace StickyNotes
         {
             DialogResult = false;
         }
-
-        // 滑动条值改变时更新预览
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             UpdatePreviewColor();
