@@ -1,0 +1,60 @@
+﻿<Window x:Class="StickyNotes.Controls.StickyNoteControl"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        SizeToContent="WidthAndHeight"
+        ShowInTaskbar="False">
+    <Border Background="{Binding BackgroundColor, 
+                    Converter={StaticResource ColorToBrushConverter},
+                    RelativeSource={RelativeSource AncestorType=Window}}" CornerRadius="5" 
+           BorderBrush="#666" BorderThickness="1"
+           Padding="10" MouseDown="Border_MouseDown" CacheMode="BitmapCache">
+        <Border.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="删除" Click="DeleteMenuItem_Click"/>
+                <MenuItem x:Name="PinMenuItem" Header="固定到窗口" Click="PinToWindow_Click"/>
+                <MenuItem x:Name="UnpinMenuItem" Header="取消固定" Click="Unpin_Click" Visibility="Collapsed"/>
+            </ContextMenu>
+        </Border.ContextMenu>
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation 
+                    Storyboard.TargetProperty="Opacity" 
+                    To="0.9" Duration="0:0:0.2"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation 
+                    Storyboard.TargetProperty="Opacity" 
+                    To="1" Duration="0:0:0.2"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Border.Triggers>
+        <Border.RenderTransform>
+            <TranslateTransform x:Name="MoveTransform"/>
+        </Border.RenderTransform>
+        <StackPanel>
+            <TextBox FontSize="{Binding FontSize}" Text="{Binding NoteContent, UpdateSourceTrigger=PropertyChanged}"
+             Visibility="Collapsed"
+             x:Name="EditBox"
+             AcceptsReturn="True"
+             TextWrapping="Wrap"
+             LostFocus="EditBox_LostFocus"
+             KeyDown="EditBox_KeyDown"/>
+            <TextBlock FontSize="{Binding FontSize}" x:Name="DisplayTextBlock"
+            Style="{StaticResource NoteTextStyle}"
+            Text="{Binding NoteContent}"
+            MouseDown="TextBlock_MouseDown"
+            TextWrapping="Wrap"/>
+        </StackPanel>
+    </Border>
+</Window>
