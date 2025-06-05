@@ -284,6 +284,10 @@ namespace StickyNotes.Controls
             if (EditBox.Visibility == Visibility.Visible)
             {
                 EndEditing();
+                if (System.Windows.Application.Current.MainWindow is MainWindow mainWindow)
+                {
+                    mainWindow.SaveNotes();
+                }
             }
         }
 
