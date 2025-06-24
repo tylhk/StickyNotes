@@ -86,7 +86,7 @@ namespace StickyNotes
             {
                 var exampleNote = new StickyNoteControl
                 {
-                    NoteContent = "这是一条示例便签：\n1.双击便签可以编辑内容\n2.右键可以删除便签或者将便签固定到窗口\n3.关闭主窗口后会自动最小化至托盘\n4.欢迎联系我的个人博客satone1008.cn",
+                    NoteContent = "这是一条示例便签：\n1.双击便签可以编辑内容 选中文字后右键可以添加文字格式\n2.右键可以删除便签或者将便签固定到窗口\n3.关闭主窗口后会自动最小化至托盘\n4.欢迎联系我的个人博客satone1008.cn",
                     Width = 200,
                     Height = 150,
                     Left = 100,

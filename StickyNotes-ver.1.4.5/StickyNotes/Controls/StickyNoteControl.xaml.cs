@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -176,7 +177,8 @@ namespace StickyNotes.Controls
                 int exStyle = Win32ApiHelper.GetWindowLong(helper.Handle, Win32ApiHelper.GWL_EXSTYLE);
                 exStyle |= (int)Win32ApiHelper.WS_EX_TOOLWINDOW;
                 Win32ApiHelper.SetWindowLong(helper.Handle, Win32ApiHelper.GWL_EXSTYLE, exStyle);
-            };
+            }; 
+            RenderMarkdownToTextBlock(NoteContent ?? "", DisplayTextBlock);
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -257,6 +259,10 @@ namespace StickyNotes.Controls
             {
                 EditBox.Text = "新便签";
             }
+            NoteContent = EditBox.Text;  // 更新属性
+
+            // 渲染 Markdown
+            RenderMarkdownToTextBlock(NoteContent, DisplayTextBlock);
 
             var fadeOut = new DoubleAnimation
             {
@@ -278,6 +284,7 @@ namespace StickyNotes.Controls
                 mainWindow.Activate();
             }
         }
+
         protected override void OnDeactivated(EventArgs e)
         {
             base.OnDeactivated(e);
@@ -433,5 +440,110 @@ namespace StickyNotes.Controls
             base.OnClosing(e);
         }
 
+        /// <summary>
+        /// 简单语法渲染
+        /// </summary>
+        private void RenderMarkdownToTextBlock(string markdown, TextBlock target)
+        {
+            target.Inlines.Clear();
+            int i = 0;
+            while (i < markdown.Length)
+            {
+                // 加粗 **
+                if (markdown.Substring(i).StartsWith("**"))
+                {
+                    int end = markdown.IndexOf("**", i + 2);
+                    if (end > i + 1)
+                    {
+                        string boldText = markdown.Substring(i + 2, end - i - 2);
+                        var bold = new Bold(new Run(boldText));
+                        target.Inlines.Add(bold);
+                        i = end + 2;
+                        continue;
+                    }
+                }
+                // 删除线 ~~
+                if (markdown.Substring(i).StartsWith("~~"))
+                {
+                    int end = markdown.IndexOf("~~", i + 2);
+                    if (end > i + 1)
+                    {
+                        string strikeText = markdown.Substring(i + 2, end - i - 2);
+                        var run = new Run(strikeText);
+                        run.TextDecorations = TextDecorations.Strikethrough;
+                        target.Inlines.Add(run);
+                        i = end + 2;
+                        continue;
+                    }
+                }
+                // 下划线 <u>...</u>
+                if (markdown.Substring(i).StartsWith("<u>"))
+                {
+                    int end = markdown.IndexOf("</u>", i + 3);
+                    if (end > i + 3)
+                    {
+                        string uText = markdown.Substring(i + 3, end - i - 3);
+                        var run = new Run(uText);
+                        run.TextDecorations = TextDecorations.Underline;
+                        target.Inlines.Add(run);
+                        i = end + 4 + 2; // 跳过</u>
+                        continue;
+                    }
+                }
+                // 普通文本
+                int nextSpecial = FindNextSpecial(markdown, i);
+                string plain = markdown.Substring(i, nextSpecial - i);
+                target.Inlines.Add(new Run(plain));
+                i = nextSpecial;
+            }
+        }
+
+        private int FindNextSpecial(string text, int start)
+        {
+            int min = text.Length;
+            int pos;
+            foreach (var tag in new[] { "**", "~~", "<u>" })
+            {
+                pos = text.IndexOf(tag, start);
+                if (pos >= 0 && pos < min) min = pos;
+            }
+            return min;
+        }
+        private void BoldMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            WrapSelection("**", "**"); // 加粗
+        }
+
+        private void UnderlineMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            WrapSelection("<u>", "</u>"); // 下划线
+        }
+
+        private void StrikethroughMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            WrapSelection("~~", "~~"); // 删除线
+        }
+
+        private void WrapSelection(string prefix, string suffix)
+        {
+            if (EditBox.Visibility != Visibility.Visible) return;
+
+            int start = EditBox.SelectionStart;
+            int length = EditBox.SelectionLength;
+            if (length == 0) return;
+
+            string text = EditBox.Text;
+            string selected = text.Substring(start, length);
+
+
+            string newText = text.Substring(0, start)
+                            + prefix + selected + suffix
+                            + text.Substring(start + length);
+
+            EditBox.Text = newText;
+
+            EditBox.Select(start + prefix.Length, length);
+            EditBox.Focus();
+        }
     }
 }

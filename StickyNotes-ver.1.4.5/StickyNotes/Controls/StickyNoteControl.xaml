@@ -43,18 +43,35 @@
             <TranslateTransform x:Name="MoveTransform"/>
         </Border.RenderTransform>
         <StackPanel>
-            <TextBox FontSize="{Binding FontSize}" Text="{Binding NoteContent, UpdateSourceTrigger=PropertyChanged}"
-             Visibility="Collapsed"
-             x:Name="EditBox"
-             AcceptsReturn="True"
-             TextWrapping="Wrap"
-             LostFocus="EditBox_LostFocus"
-             KeyDown="EditBox_KeyDown"/>
+            <TextBox x:Name="EditBox"
+                 Visibility="Collapsed"
+                 FontSize="{Binding FontSize}"
+                 Text="{Binding NoteContent, UpdateSourceTrigger=PropertyChanged}"
+                 AcceptsReturn="True"
+                 TextWrapping="Wrap"
+                 Padding="5"
+                 LostFocus="EditBox_LostFocus"
+                 KeyDown="EditBox_KeyDown">
+                <TextBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="加粗" Click="BoldMenuItem_Click"/>
+                        <MenuItem Header="下划线" Click="UnderlineMenuItem_Click"/>
+                        <MenuItem Header="删除线" Click="StrikethroughMenuItem_Click"/>
+                        <Separator/>
+
+                        <MenuItem Header="剪切" Command="Cut"/>
+                        <MenuItem Header="复制" Command="Copy"/>
+                        <MenuItem Header="粘贴" Command="Paste"/>
+                        <Separator/>
+                        <MenuItem Header="全选" Command="SelectAll"/>
+                    </ContextMenu>
+                </TextBox.ContextMenu>
+            </TextBox>
             <TextBlock FontSize="{Binding FontSize}" x:Name="DisplayTextBlock"
-            Style="{StaticResource NoteTextStyle}"
-            Text="{Binding NoteContent}"
-            MouseDown="TextBlock_MouseDown"
-            TextWrapping="Wrap"/>
+                Style="{StaticResource NoteTextStyle}"
+                Text="{Binding NoteContent}"
+                MouseDown="TextBlock_MouseDown"
+                TextWrapping="Wrap"/>
         </StackPanel>
     </Border>
 </Window>
