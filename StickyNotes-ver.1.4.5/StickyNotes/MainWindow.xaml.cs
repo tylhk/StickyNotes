@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using StickyNotes.Controls;
 using System.ComponentModel;
 using System.IO;
 using System.Text;
@@ -29,7 +30,11 @@ namespace StickyNotes
             public double OffsetX { get; set; }
             public double OffsetY { get; set; }
             public string Color { get; set; }
+
+
         }
+        //对象管理器
+        private List<StickyNoteControl> stickyNoteControls = new List<StickyNoteControl>();
         public Color SelectedColor { get; set; } = Colors.Yellow;
         private void ColorPickerButton_Click(object sender, RoutedEventArgs e)
         {
@@ -59,9 +64,26 @@ namespace StickyNotes
                     ((ComboBoxItem)FontSizeCombo.SelectedItem).Content.ToString()),
                 Topmost = true
             };
+            stickyNoteControls.Add(note);
+            //MessageBox.Show(stickyNoteControls.Count.ToString());
             note.Show();
+            //note.Show();
+
+            //for 
             InputTextBox.Clear();
             SaveNotes();
+        }
+        //对象被创建后需要调一下showNotes
+        public void showNotes()
+        {
+            foreach (var note in stickyNoteControls)
+            {
+                if (!note.IsVisible)  // 或 note.Visibility == Visibility.Visible
+                {
+                    note.Show();
+                }
+
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -93,7 +115,8 @@ namespace StickyNotes
                     Top = 100,
                     BackgroundColor = Colors.Yellow
                 };
-                exampleNote.Show();
+                stickyNoteControls.Add(exampleNote);
+                showNotes();
             }
         }
 
@@ -103,7 +126,59 @@ namespace StickyNotes
 
             VersionTextBlock.Text = $"v{version.Major}.{version.Minor}.{version.Build}";
         }
+        // 原save方法
+        //public void SaveNotes()
+        //{
+        //    string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        //    string directoryPath = Path.Combine(appDataPath, "StickyNotes");
+        //    string filePath = Path.Combine(directoryPath, "notes.json");
 
+        //    try
+        //    {
+        //        Directory.CreateDirectory(directoryPath);
+
+        //        var notes = Application.Current.Windows
+        //            .OfType<StickyNoteControl>()
+        //            .Where(n => n.IsVisible && !string.IsNullOrWhiteSpace(n.NoteContent))
+        //            .ToList();
+
+
+        //        File.AppendAllText(
+        //            Path.Combine(directoryPath, "debug.log"),
+        //            $"[{DateTime.Now}] 保存便签数量: {notes.Count}\n"
+        //        );
+
+        //        if (File.Exists(filePath))
+        //        {
+        //            File.Delete(filePath);
+        //        }
+
+        //        if (notes.Count == 0) return;
+
+        //        var notesData = notes.Select(n => new NoteData
+        //        {
+        //            Content = n.NoteContent,
+        //            X = n.Left,
+        //            Y = n.Top,
+        //            TargetWindowHandle = n.TargetWindowHandle.ToInt64(),
+        //            TargetWindowTitle = Win32ApiHelper.GetWindowTitle(n.TargetWindowHandle),
+        //            TargetWindowClass = Win32ApiHelper.GetWindowClassName(n.TargetWindowHandle),
+        //            OffsetX = n.OffsetFromTarget.X,
+        //            OffsetY = n.OffsetFromTarget.Y,
+        //            Color = n.BackgroundColor.ToString()
+        //        }).ToList();
+
+        //        File.WriteAllText(
+        //            filePath,
+        //            JsonConvert.SerializeObject(notesData, Formatting.Indented),
+        //            Encoding.UTF8
+        //        );
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"保存失败: {ex.Message}\n堆栈跟踪:\n{ex.StackTrace}");
+        //    }
+        //}
         public void SaveNotes()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -114,10 +189,7 @@ namespace StickyNotes
             {
                 Directory.CreateDirectory(directoryPath);
 
-                var notes = Application.Current.Windows
-                    .OfType<StickyNoteControl>()
-                    .Where(n => n.IsVisible && !string.IsNullOrWhiteSpace(n.NoteContent))
-                    .ToList();
+                var notes = stickyNoteControls.Where(n => n.IsUserDeleted is false).ToList();
 
                 File.AppendAllText(
                     Path.Combine(directoryPath, "debug.log"),
@@ -131,17 +203,46 @@ namespace StickyNotes
 
                 if (notes.Count == 0) return;
 
-                var notesData = notes.Select(n => new NoteData
+                // 提前获取所有屏幕的工作区域
+                var screenRects = Screen.AllScreens.Select(s => s.WorkingArea).ToList();
+
+                var notesData = notes.Select(n =>
                 {
-                    Content = n.NoteContent,
-                    X = n.Left,
-                    Y = n.Top,
-                    TargetWindowHandle = n.TargetWindowHandle.ToInt64(),
-                    TargetWindowTitle = Win32ApiHelper.GetWindowTitle(n.TargetWindowHandle),
-                    TargetWindowClass = Win32ApiHelper.GetWindowClassName(n.TargetWindowHandle),
-                    OffsetX = n.OffsetFromTarget.X,
-                    OffsetY = n.OffsetFromTarget.Y,
-                    Color = n.BackgroundColor.ToString()
+                    double left = n.Left;
+                    double top = n.Top;
+
+                    int x = (int)left;
+                    int y = (int)top;
+
+                    // 判断是否在任意屏幕区域内
+                    bool isVisible = false;
+                    foreach (var rect in screenRects)
+                    {
+                        if (rect.Contains(x, y))
+                        {
+                            isVisible = true;
+                            break;
+                        }
+                    }
+
+                    if (!isVisible)
+                    {
+                        x = 100;
+                        y = 100;
+                    }
+
+                    return new NoteData
+                    {
+                        Content = n.NoteContent,
+                        X = x,
+                        Y = y,
+                        TargetWindowHandle = n.TargetWindowHandle.ToInt64(),
+                        TargetWindowTitle = null,
+                        TargetWindowClass = Win32ApiHelper.GetWindowClassName(n.TargetWindowHandle),
+                        OffsetX = n.OffsetFromTarget.X,
+                        OffsetY = n.OffsetFromTarget.Y,
+                        Color = n.BackgroundColor.ToString()
+                    };
                 }).ToList();
 
                 File.WriteAllText(
@@ -152,9 +253,13 @@ namespace StickyNotes
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"保存失败: {ex.Message}\n堆栈跟踪:\n{ex.StackTrace}");
+                File.AppendAllText(
+                    Path.Combine(directoryPath, "debug.log"),
+                    $"[{DateTime.Now}] 保存失败: {ex.Message}\n"
+                );
             }
         }
+
 
         public void LoadNotes()
         {
@@ -202,7 +307,7 @@ namespace StickyNotes
                     color = Colors.Yellow;
                 }
                 IntPtr targetHandle = new IntPtr(data.TargetWindowHandle);
-                
+
                 var note = new StickyNoteControl
                 {
                     NoteContent = data.Content,
@@ -212,7 +317,9 @@ namespace StickyNotes
                     OffsetFromTarget = new Point(data.OffsetX, data.OffsetY),
                     BackgroundColor = color
                 };
-                note.Show();
+                stickyNoteControls.Add(note);
+                //MessageBox.Show(stickyNoteControls.Count.ToString());
+                showNotes();
             }
         }
     }
