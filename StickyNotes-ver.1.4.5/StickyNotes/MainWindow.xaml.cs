@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using StickyNotes.Controls;
+using StickyNotes.Utils;
 using System.ComponentModel;
 using System.IO;
 using System.Text;
@@ -92,6 +93,7 @@ namespace StickyNotes
             {
                 e.Cancel = true;
                 this.Hide();
+                Utils.ToastUtil.ShowWindowsToastNotification("通知", "StickyNotes已最小化至任务栏");
                 return;
             }
             foreach (Window window in Application.Current.Windows.OfType<StickyNoteControl>().ToList())
@@ -189,7 +191,7 @@ namespace StickyNotes
             {
                 Directory.CreateDirectory(directoryPath);
 
-                var notes = stickyNoteControls.Where(n => n.IsUserDeleted is false).ToList();
+                var notes = stickyNoteControls.Where(n => n.IsUserDeleted == false).ToList();
 
                 File.AppendAllText(
                     Path.Combine(directoryPath, "debug.log"),
@@ -203,29 +205,13 @@ namespace StickyNotes
 
                 if (notes.Count == 0) return;
 
-                // 提前获取所有屏幕的工作区域
-                var screenRects = Screen.AllScreens.Select(s => s.WorkingArea).ToList();
-
                 var notesData = notes.Select(n =>
                 {
-                    double left = n.Left;
-                    double top = n.Top;
+                    int x = (int)n.Left;
+                    int y = (int)n.Top;
 
-                    int x = (int)left;
-                    int y = (int)top;
-
-                    // 判断是否在任意屏幕区域内
-                    bool isVisible = false;
-                    foreach (var rect in screenRects)
-                    {
-                        if (rect.Contains(x, y))
-                        {
-                            isVisible = true;
-                            break;
-                        }
-                    }
-
-                    if (!isVisible)
+                    // 使用 ScreenHelper 判断是否在屏幕区域内
+                    if (!ScreenHelper.IsPointOnAnyScreen(x, y))
                     {
                         x = 100;
                         y = 100;
@@ -255,7 +241,7 @@ namespace StickyNotes
             {
                 File.AppendAllText(
                     Path.Combine(directoryPath, "debug.log"),
-                    $"[{DateTime.Now}] 保存失败: {ex.Message}\n"
+                    $"[{DateTime.Now}] 保存失败: {ex.Message}\n{ex.StackTrace}"
                 );
             }
         }
