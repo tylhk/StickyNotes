@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using StickyNotes.Utils;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -313,13 +314,15 @@ namespace StickyNotes.Controls
             IntPtr targetHandle = _preMenuTargetHandle;
             if (targetHandle == IntPtr.Zero)
             {
-                MessageBox.Show("请先选中目标窗口，再右键固定！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show("请先选中目标窗口，再右键固定！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Utils.ToastUtil.ShowWindowsToastNotification("操作失败", "请先选中目标窗口，再右键固定！");
                 return;
             }
             var wih = new WindowInteropHelper(this);
             if (targetHandle == wih.Handle)
             {
-                MessageBox.Show("不能固定到自身窗口！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show("不能固定到自身窗口！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                Utils.ToastUtil.ShowWindowsToastNotification("操作失败", "请先选中目标窗口，不能固定到自身窗口！");
                 return;
             }
             if (Win32ApiHelper.IsDesktopWindow(targetHandle))
@@ -340,6 +343,8 @@ namespace StickyNotes.Controls
             PinMenuItem.Visibility = Visibility.Visible;
             UnpinMenuItem.Visibility = Visibility.Collapsed;
             this.Topmost = true;
+            this.Owner = null;
+            this.Show();
         }
 
         public void PinToDesktop()
@@ -395,16 +400,31 @@ namespace StickyNotes.Controls
             return screenPoint;
         }
 
+
         private void StopTracking()
         {
             if (_trackingTimer != null)
             {
                 _trackingTimer.Stop();
                 _trackingTimer = null;
+                if (System.Windows.Application.Current.MainWindow is MainWindow mainWindow)
+                {
+                    bool inWindow = StickyNotes.Utils.ScreenHelper.IsPointOnAnyScreen((int)this.Left, (int)this.Top);
+                    if (!inWindow)
+                    {
+                        this.Left = 100;
+                        this.Top = 100;
+                    }
+                    mainWindow.showNotes();
+                }
             }
-            _targetWindowHandle = IntPtr.Zero;
             PinMenuItem.Visibility = Visibility.Visible;
             UnpinMenuItem.Visibility = Visibility.Collapsed;
+            this.Owner = null;
+            var helper = new WindowInteropHelper(this);
+            helper.Owner = IntPtr.Zero;
+
+
         }
         protected override void OnClosed(EventArgs e)
         {
