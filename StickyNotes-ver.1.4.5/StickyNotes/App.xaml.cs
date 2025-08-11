@@ -34,6 +34,7 @@ namespace StickyNotes
 
             var contextMenu = new ContextMenuStrip();
             contextMenu.Items.Add("显示主窗口", null, (s, args) => ShowMainWindow());
+            contextMenu.Items.Add("关于项目", null, (s, args) => ShowSetting());
             contextMenu.Items.Add("退出", null, (s, args) => ExitApplication());
             _notifyIcon.ContextMenuStrip = contextMenu;
 
@@ -57,6 +58,11 @@ namespace StickyNotes
             MainWindow.ShowInTaskbar = true;
             MainWindow.WindowState = WindowState.Normal;
             MainWindow.Activate();
+        }
+        private void ShowSetting()
+        {
+            SettingPanel settingPanel = new SettingPanel();
+            settingPanel.Show();
         }
 
         private void ExitApplication()

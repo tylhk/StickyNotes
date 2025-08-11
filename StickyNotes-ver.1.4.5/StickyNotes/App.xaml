@@ -4,12 +4,28 @@
              xmlns:converters="clr-namespace:StickyNotes.Converters">
     <Application.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/PresentationFramework.Fluent;component/Themes/Fluent.xaml" />
+            </ResourceDictionary.MergedDictionaries>
             <!-- 自定义字体样式 -->
             <Style TargetType="TextBlock" x:Key="NoteTextStyle">
                 <Setter Property="FontFamily" Value="/Fonts/#YourFontName"/>
                 <!-- 其他样式属性 -->
                 <Setter Property="FontSize" Value="14"/>
             </Style>
+            <!-- 自定义 Hyperlink 样式 -->
+            <Style TargetType="Hyperlink">
+                <Setter Property="Foreground" Value="Blue" />
+                <!-- 或者 {DynamicResource SystemAccentColor} -->
+                <Setter Property="TextDecorations" Value="None" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="TextDecorations" Value="Underline" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
 
             <!-- 颜色转换器 -->
             <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
