@@ -71,7 +71,8 @@
                 Style="{StaticResource NoteTextStyle}"
                 Text="{Binding NoteContent}"
                 MouseDown="TextBlock_MouseDown"
-                TextWrapping="Wrap"/>
+                TextWrapping="Wrap"
+                Foreground="{Binding FontColor, Converter={StaticResource ColorToBrushConverter}, RelativeSource={RelativeSource AncestorType=Window}}"/>
         </StackPanel>
     </Border>
 </Window>

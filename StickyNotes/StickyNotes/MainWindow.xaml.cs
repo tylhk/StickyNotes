@@ -31,18 +31,21 @@ namespace StickyNotes
             public double OffsetX { get; set; }
             public double OffsetY { get; set; }
             public string Color { get; set; }
+            public string FontColor { get; set; }
 
 
         }
         //对象管理器
         private List<StickyNoteControl> stickyNoteControls = new List<StickyNoteControl>();
         public Color SelectedColor { get; set; } = Colors.Yellow;
+        public Color SelectedFontColor { get; set; } = Colors.Black;
         private void ColorPickerButton_Click(object sender, RoutedEventArgs e)
         {
             var colorPickerDialog = new ColorPickerDialog();
             if (colorPickerDialog.ShowDialog() == true)
             {
                 SelectedColor = colorPickerDialog.SelectedColor;
+                SelectedFontColor = colorPickerDialog.SelectedFontColor;
             }
         }
 
@@ -61,6 +64,7 @@ namespace StickyNotes
                 Width = 200,
                 Height = 150,
                 BackgroundColor = SelectedColor,
+                FontColor = SelectedFontColor,
                 FontSize = double.Parse(
                     ((ComboBoxItem)FontSizeCombo.SelectedItem).Content.ToString()),
                 Topmost = true
@@ -115,7 +119,8 @@ namespace StickyNotes
                     Height = 150,
                     Left = 100,
                     Top = 100,
-                    BackgroundColor = Colors.Yellow
+                    BackgroundColor = Colors.Yellow,
+                    FontColor = Colors.Black
                 };
                 stickyNoteControls.Add(exampleNote);
                 showNotes();
@@ -227,7 +232,8 @@ namespace StickyNotes
                         TargetWindowClass = Win32ApiHelper.GetWindowClassName(n.TargetWindowHandle),
                         OffsetX = n.OffsetFromTarget.X,
                         OffsetY = n.OffsetFromTarget.Y,
-                        Color = n.BackgroundColor.ToString()
+                        Color = n.BackgroundColor.ToString(),
+                        FontColor = n.FontColor.ToString()
                     };
                 }).ToList();
 
@@ -303,6 +309,21 @@ namespace StickyNotes
                     OffsetFromTarget = new Point(data.OffsetX, data.OffsetY),
                     BackgroundColor = color
                 };
+
+                Color fontColor = Colors.Black;
+                try
+                {
+                    if (!string.IsNullOrEmpty(data.FontColor))
+                    {
+                        fontColor = (Color)ColorConverter.ConvertFromString(data.FontColor);
+                    }
+                }
+                catch
+                {
+                    fontColor = Colors.Black;
+                }
+                note.FontColor = fontColor;
+
                 stickyNoteControls.Add(note);
                 //MessageBox.Show(stickyNoteControls.Count.ToString());
                 showNotes();

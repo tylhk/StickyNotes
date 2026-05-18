@@ -42,6 +42,14 @@ namespace StickyNotes.Controls
         new PropertyMetadata(Colors.Yellow)
     );
 
+        public static readonly DependencyProperty FontColorProperty =
+            DependencyProperty.Register(
+                "FontColor",
+                typeof(Color),
+                typeof(StickyNoteControl),
+                new PropertyMetadata(Colors.Black)
+            );
+
         public static readonly DependencyProperty FontSizeProperty =
             DependencyProperty.Register("FontSize", typeof(double), typeof(StickyNoteControl),
                 new PropertyMetadata(14.0));
@@ -50,6 +58,12 @@ namespace StickyNotes.Controls
         {
             get => (Color)GetValue(BackgroundColorProperty);
             set => SetValue(BackgroundColorProperty, value);
+        }
+
+        public Color FontColor
+        {
+            get => (Color)GetValue(FontColorProperty);
+            set => SetValue(FontColorProperty, value);
         }
 
         public double FontSize
