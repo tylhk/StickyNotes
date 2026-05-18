@@ -10,6 +10,7 @@ namespace StickyNotes
     public partial class ColorPickerDialog : Window
     {
         public Color SelectedColor { get; set; } = Colors.Yellow;
+        public Color SelectedFontColor { get; set; } = Colors.Black;
 
         public ColorPickerDialog()
         {
@@ -18,6 +19,10 @@ namespace StickyNotes
             RedSlider.Value = 255;
             GreenSlider.Value = 255;
             BlueSlider.Value = 0;
+            AlphaSlider.Value = 255;
+            FontRedSlider.Value = 0;
+            FontGreenSlider.Value = 0;
+            FontBlueSlider.Value = 0;
             UpdatePreviewColor();
         }
 
@@ -30,19 +35,37 @@ namespace StickyNotes
         public static readonly DependencyProperty PreviewColorProperty =
             DependencyProperty.Register("PreviewColor", typeof(SolidColorBrush), typeof(ColorPickerDialog));
 
+        public SolidColorBrush PreviewTextBrush
+        {
+            get => (SolidColorBrush)GetValue(PreviewTextBrushProperty);
+            set => SetValue(PreviewTextBrushProperty, value);
+        }
+
+        public static readonly DependencyProperty PreviewTextBrushProperty =
+            DependencyProperty.Register("PreviewTextBrush", typeof(SolidColorBrush), typeof(ColorPickerDialog));
+
         private void UpdatePreviewColor()
         {
-            var color = Color.FromRgb(
+            var bg = Color.FromArgb(
+                (byte)AlphaSlider.Value,
                 (byte)RedSlider.Value,
                 (byte)GreenSlider.Value,
                 (byte)BlueSlider.Value
             );
-            PreviewColor = new SolidColorBrush(color);
+            PreviewColor = new SolidColorBrush(bg);
+
+            var textColor = Color.FromRgb(
+                (byte)FontRedSlider.Value,
+                (byte)FontGreenSlider.Value,
+                (byte)FontBlueSlider.Value
+            );
+            PreviewTextBrush = new SolidColorBrush(textColor);
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             SelectedColor = PreviewColor.Color;
+            SelectedFontColor = PreviewTextBrush.Color;
             DialogResult = true;
         }
 
@@ -65,6 +88,7 @@ namespace StickyNotes
             AnimateSlider(RedSlider, r);
             AnimateSlider(GreenSlider, g);
             AnimateSlider(BlueSlider, b);
+            AnimateSlider(AlphaSlider, 255);
         }
 
         private void AnimateSlider(Slider slider, double targetValue)
