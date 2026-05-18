@@ -1,0 +1,80 @@
+<Window x:Class="StickyNotes.ColorPickerDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="选择颜色"
+        Width="420"
+        Height="460"
+        MinWidth="360"
+        MinHeight="300"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResizeWithGrip"
+        SizeToContent="Manual">
+    <!-- Modified: allow resizing and increased default size to avoid clipped content -->
+    <Grid Margin="10">
+        <StackPanel>
+            <!-- Background color controls -->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="红色：" VerticalAlignment="Center"/>
+                <Slider x:Name="RedSlider" Minimum="0" Maximum="255" Width="200" ValueChanged="Slider_ValueChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="绿色：" VerticalAlignment="Center"/>
+                <Slider x:Name="GreenSlider" Minimum="0" Maximum="255" Width="200" ValueChanged="Slider_ValueChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="蓝色：" VerticalAlignment="Center"/>
+                <Slider x:Name="BlueSlider" Minimum="0" Maximum="255" Width="200" ValueChanged="Slider_ValueChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="不透明度：" VerticalAlignment="Center"/>
+                <Slider x:Name="AlphaSlider" Minimum="0" Maximum="255" Width="200" ValueChanged="Slider_ValueChanged"/>
+            </StackPanel>
+
+            <!-- Font color controls (added) -->
+            <TextBlock Text="字体颜色：" Margin="0,8,0,2"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="红色：" VerticalAlignment="Center"/>
+                <Slider x:Name="FontRedSlider" Minimum="0" Maximum="255" Width="170" ValueChanged="Slider_ValueChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="绿色：" VerticalAlignment="Center"/>
+                <Slider x:Name="FontGreenSlider" Minimum="0" Maximum="255" Width="170" ValueChanged="Slider_ValueChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="蓝色：" VerticalAlignment="Center"/>
+                <Slider x:Name="FontBlueSlider" Minimum="0" Maximum="255" Width="170" ValueChanged="Slider_ValueChanged"/>
+            </StackPanel>
+
+            <!-- Preset color blocks for background -->
+            <StackPanel Orientation="Horizontal" Margin="0,10">
+                <Border Width="30" Height="30" Margin="2" Cursor="Hand"
+                        Background="#FFFF0000" Tag="255,0,0" BorderBrush="Black" BorderThickness="1"
+                        MouseLeftButtonDown="ColorBlock_MouseLeftButtonDown"/>
+                <Border Width="30" Height="30" Margin="2" Cursor="Hand"
+                        Background="#FF00FF00" Tag="0,255,0" BorderBrush="Black" BorderThickness="1"
+                        MouseLeftButtonDown="ColorBlock_MouseLeftButtonDown"/>
+                <Border Width="30" Height="30" Margin="2" Cursor="Hand"
+                        Background="#FF0000FF" Tag="0,0,255" BorderBrush="Black" BorderThickness="1"
+                        MouseLeftButtonDown="ColorBlock_MouseLeftButtonDown"/>
+                <Border Width="30" Height="30" Margin="2" Cursor="Hand"
+                        Background="#FFFFFF00" Tag="255,255,0" BorderBrush="Black" BorderThickness="1"
+                        MouseLeftButtonDown="ColorBlock_MouseLeftButtonDown"/>
+                <Border Width="30" Height="30" Margin="2" Cursor="Hand"
+                        Background="White" Tag="255, 255, 255" BorderBrush="Black" BorderThickness="1"
+                        MouseLeftButtonDown="ColorBlock_MouseLeftButtonDown"/>
+            </StackPanel>
+
+            <!-- Preview area: shows background and live-updating preview text color (added) -->
+            <Border Height="60" BorderBrush="Gray" BorderThickness="1"
+                    Background="{Binding PreviewColor}" Padding="6">
+                <TextBlock Text="预览文字" VerticalAlignment="Center" HorizontalAlignment="Left"
+                           FontSize="16" Foreground="{Binding PreviewTextBrush}" />
+            </Border>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10">
+                <Button Content="确定" Width="80" Click="OkButton_Click"/>
+                <Button Content="取消" Width="80" Margin="5,0,0,0" Click="CancelButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
